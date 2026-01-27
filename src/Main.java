@@ -1,11 +1,29 @@
 
-import java.awt.*;
+import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args){
-        System.out.println ("Sistema Medilab iniciando");
+    public static void main(String[] args) {
+        System.out.println("Sistema Medilab iniciando");
+
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
         int opcao = -1;
-        Scanner scanner = new Scanner (System.in);
+
+        // Criando um paciente
+        Paciente p1 = new Paciente("Bruno", 37, "123.456.789-00");
+
+
+        // Mostrando os dados  usando getters
+        System.out.println("Nome: " + p1.getNome());
+        System.out.println("Idade: " + p1.getIdade());
+        System.out.println("CPF: " + p1.getCpf());
+
+        pacientes.add(p1);
+
+        //While(opcao != 0) {
+
+
         while (opcao != 0) {
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
@@ -13,20 +31,44 @@ public class Main {
             System.out.println("Escolher uma opção: ");
 
             opcao = scanner.nextInt();
+            scanner.nextLine();
+            //limpa o ENTER que ficou no buffer
+
             if (opcao == 1) {
-                System.out.println("Você escolheu CADASTRAR");
+                System.out.print("Digite o nome:");
+                String nome = scanner.nextLine();
+
+                System.out.println("Digite a idade:");
+                int idade = scanner.nextInt();
+                scanner.nextLine(); //limpar o Enter depois do número
+
+                System.out.println("Digite o cpf:");
+                String cpf = scanner.nextLine();
+
+                Paciente paciente = new Paciente(nome, idade, cpf);
+                pacientes.add(paciente); //adiciona na lista
+
+                System.out.println("Paciente cadastrado com sucesso!");
+
+            } else if (opcao == 2) {
+                System.out.println("Lista de pacientes:");
+
+                for (Paciente p : pacientes) {
+                    System.out.println("Nome: " + p.getNome());
+                    System.out.println("IDADE: " + p.getIdade());
+                    System.out.println("CPF: " + p.getCpf());
+                    System.out.println("------------");
+                }
             }
-            else if (opcao == 2) {
-                System.out.println("Você escolheu LISTAR");
-            }
-            else if (opcao == 0) {
-                System.out.println("Você escolheu SAIR");
-            }
-            else {
-                System.out.println("Opção inválida. Tente novamente.");
+
+              else if (opcao == 0) {
+                    System.out.println("Saindo do sistema...");
+                }
 
 
+                }
+
             }
-        } // fecha while
-    } // fecha main
-} // fecha classe
+
+        }
+
