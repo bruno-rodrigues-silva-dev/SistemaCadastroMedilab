@@ -11,7 +11,7 @@ O SistemaCadastroMedilab é uma aplicação em Java executada no console, que si
 - Listagem de pacientes cadastrados
 - Armazenamento em memória utilizando ArrayList
 
-## Tecnologias
+## -Tecnologias utilizadas
 - Java
 - Programação Orientada a Objetos (POO)
 - ArrayList
