@@ -1,3 +1,4 @@
+package br.com.medilab.model;
 
 public class Paciente {
     private String nome;

@@ -1,12 +1,14 @@
 
-import java.util.ArrayList;
+import br.com.medilab.model.Paciente;
+import service.PacienteService;
+
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Sistema Medilab iniciando");
 
-        ArrayList<Paciente> pacientes = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
 
@@ -19,7 +21,8 @@ public class Main {
         System.out.println("Idade: " + p1.getIdade());
         System.out.println("CPF: " + p1.getCpf());
 
-        pacientes.add(p1);
+        PacienteService pacienteService = new PacienteService();
+        pacienteService.cadastrarPaciente(p1);
 
         //While(opcao != 0) {
 
@@ -46,14 +49,14 @@ public class Main {
                 String cpf = scanner.nextLine();
 
                 Paciente paciente = new Paciente(nome, idade, cpf);
-                pacientes.add(paciente); //adiciona na lista
+                pacienteService.cadastrarPaciente(paciente);
 
-                System.out.println("Paciente cadastrado com sucesso!");
+                System.out.println("br.com.medilab.model.Paciente cadastrado com sucesso!");
 
             } else if (opcao == 2) {
                 System.out.println("Lista de pacientes:");
 
-                for (Paciente p : pacientes) {
+                for (Paciente p : pacienteService.listarPacientes()) {
                     System.out.println("Nome: " + p.getNome());
                     System.out.println("IDADE: " + p.getIdade());
                     System.out.println("CPF: " + p.getCpf());
