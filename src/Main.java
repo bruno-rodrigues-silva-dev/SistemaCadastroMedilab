@@ -1,35 +1,25 @@
 
 import br.com.medilab.model.Paciente;
 import service.PacienteService;
-
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         System.out.println("Sistema Medilab iniciando");
 
         Scanner scanner = new Scanner(System.in);
+        PacienteService pacienteService = new PacienteService();
+
         int opcao = -1;
 
-        // Criando um paciente
-        Paciente p1 = new Paciente("Bruno", 37, "123.456.789-00");
-
-
-        // Mostrando os dados  usando getters
-        System.out.println("Nome: " + p1.getNome());
-        System.out.println("Idade: " + p1.getIdade());
-        System.out.println("CPF: " + p1.getCpf());
-
-        PacienteService pacienteService = new PacienteService();
-        pacienteService.cadastrarPaciente(p1);
-
         //While(opcao != 0) {
-
-
         while (opcao != 0) {
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
+            System.out.println("3 - Buscar por CPF");
+            System.out.println("4 - Editar por CPF");
+            System.out.println("5 - Excluir por CPF");
             System.out.println("0 - Sair");
             System.out.println("Escolher uma opção: ");
 
@@ -62,15 +52,60 @@ public class Main {
                     System.out.println("CPF: " + p.getCpf());
                     System.out.println("------------");
                 }
-            }
+            } else if (opcao == 3) {
+                System.out.println("Digite o CPF para buscar: ");
+                String cpfBusca = scanner.nextLine();
 
-              else if (opcao == 0) {
-                    System.out.println("Saindo do sistema...");
+                Paciente pacienteEncontrado =
+                        pacienteService.buscarPacientePorCpf(cpfBusca);
+
+                if (pacienteEncontrado == null) {
+                    System.out.println("Paciente não encontrado");
+                } else {
+                    System.out.println("Paciente encontrado");
+                    System.out.println("Nome:" + pacienteEncontrado.getNome());
+                    System.out.println("Idade:" + pacienteEncontrado.getIdade());
+                    System.out.println("CPF: " + pacienteEncontrado.getCpf());
+                }
+            } else if (opcao == 4) {
+                System.out.println(("Digite o CPF do paciente: "));
+                String cpf = scanner.nextLine();
+
+                System.out.println("Novo nome: ");
+                String novoNome = scanner.nextLine();
+
+                System.out.println("Nova idade: ");
+                int novaIdade = scanner.nextInt();
+                scanner.nextLine();
+
+                boolean editado =
+                        pacienteService.editarPacientePorCpf(cpf, novoNome, novaIdade);
+                if (editado) {
+                    System.out.println("Paciente atualizado com sucesso!");
+                } else {
+                    System.out.println("Paciente não encontrado. ");
+                }
+            } else if (opcao == 5) {
+                System.out.println("Digite o CPF do paciente para excluir: ");
+                String cpf = scanner.nextLine();
+
+                boolean removido =
+                        pacienteService.removerPacientePorCpf(cpf);
+
+                if (removido) {
+                    System.out.println("Paciente removido com sucesso!");
+                } else {
+                    System.out.println("Paciente não encontrado. ");
                 }
 
 
-                }
-
+            } else if (opcao == 0) {
+                System.out.println("Saindo do sistema...");
             }
+
 
         }
+
+    }
+
+}

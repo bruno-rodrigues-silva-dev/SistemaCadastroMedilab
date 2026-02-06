@@ -25,4 +25,13 @@ public class Paciente {
             return cpf;
         }
 
+    // Setters (ESSENCIAIS para edição)
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
 }
